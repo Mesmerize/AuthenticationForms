@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const SignUp = () => {
 
@@ -22,6 +22,26 @@ const SignUp = () => {
 // password.onchange = validatePassword;
 // confirmPassword.onkeyup = validatePassword;
 
+const [password, setPassword] = useState('');
+const [confirmpassword, setConfirmPassword] = useState('');
+
+function updatePassword(e) {
+    setPassword(e.target.value);
+}
+
+function updateConfirmPassword(e) {
+    setConfirmPassword(e.target.value);
+}
+
+function submitForm() {
+    if (password === confirmpassword) {
+        console.log('Passwords Match');
+        // Call signup api using fetch()
+    }
+    else {
+        alert('Passwords do not match!');
+    }
+}
 
     return (
         <div className='login-container'>
@@ -44,19 +64,19 @@ const SignUp = () => {
                 <label for="login-input-password" class="login__label">
                     Password
                 </label>
-                <input id="login-input-password" class="login__input" type="password" required/>
+                <input id="login-input-password" class="login__input" type="password" required onChange={updatePassword}/>
 
                 <label for="login-confirm-password" class="login__label">
                     Confirm Password
                 </label>
-                <input id="login-confirm-password" class="login__input" type="password" required/>
+                <input id="login-confirm-password" class="login__input" type="password" required onChange={updateConfirmPassword}/>
 
                 <label for="login-sign-up" class="login__label--checkbox">
                     <input id="login-sign-up" type="checkbox" class="login__input--checkbox" />
                     <a href="#">Accept Terms and Conditions</a>
                 </label>
                 
-                <button type='submit' class="login__submit">Sign Up</button>
+                <button onClick={submitForm} class="login__submit">Sign Up</button>
 
             </form>
 
